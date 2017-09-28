@@ -1,0 +1,72 @@
+<html>
+<body>
+<script type="text/javascript">
+console.log('sine');
+var audio_buffer_size = 1024;
+var twopi = Math.PI * 2;
+var freq = 100;
+var wave_length = old_wave_length = 0;
+var counter = 0;
+var audio = new (window.AudioContext || window.webkitAudioContext)();
+var volume_node = audio.createGain();
+
+var buffer_gen = (e) => {
+	var buffer = e.outputBuffer.getChannelData(0);
+	for (var x = 0; x < buffer.length; x++) {
+		counter++;
+		buffer[x] = Math.sin((counter / wave_length) * twopi);
+		/*
+		// triangle (bad)
+		buffer[x] = ((counter < wave_length/2) ? counter/wave_length : (wave_length-counter)/wave_length) * 2 - 0.5;
+		// inverted farts
+		buffer[x] = (counter - wave_length/4) / counter; 
+		// fucked triangle
+		buffer[x] = wave_length/(wave_length - Math.abs(counter % (2 * wave_length) - wave_length));
+		// fucked saw
+		buffer[x] = (wave_length - Math.abs(counter % (2 * wave_length) - wave_length))/(wave_length*2);
+		// fucked triangle
+		buffer[x] = Math.abs((counter % wave_length)) - 0.5;
+		// saw
+		buffer[x] += (counter / wave_length - 0.5) * 0.5;
+		// sqaure
+		buffer[x] += ((counter < wave_length/2) ? 1 : -1) * 0.5;
+		*/
+		if (counter >= wave_length) {
+			old_wave_length = wave_length;
+			wave_length = audio.sampleRate / freq;
+			counter = (wave_length == old_wave_length) ? counter - wave_length : 0;
+		}
+	}
+}
+
+volume_node.gain.value = 0.5;
+volume_node.connect(audio.destination);
+audio_node = audio.createScriptProcessor(audio_buffer_size, 1, 1);
+audio_node.onaudioprocess = buffer_gen;
+audio_node.connect(volume_node);
+
+console.log(audio_node);
+</script>
+
+<div id="container" style="width:1100px;padding:50px;background:#ccc;margin:100px auto;font-size:48px;line-height:1.5em;">
+	<div style="font-align:center;font-size:72px;">Sine</div>
+	<div id="freq_display">
+		Pitch <span id="freq"></span>
+	</div>
+	<div id="volume_slider">
+		<input id="volume_val" type="range" min="1" max="1000" value="50" class="slider" style="width:1000px">
+	</div>
+</div>
+
+<script type="text/javascript">
+var freq_display = document.getElementById("freq");
+freq_display.innerHTML = freq;
+var volume_slider = document.getElementById("volume_val");
+volume_slider.oninput = function() {
+	freq = Math.pow(this.value / 10, 2) + 20;
+	freq_display.innerHTML = freq;
+}
+</script>
+
+</body>
+</html>
