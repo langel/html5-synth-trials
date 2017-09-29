@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Oscillator</title>
+	<link href="style/oscillator.css" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+		<div id="logo">
+			Oscillator
+		</div>
+		<div id="freq_display">
+			Pitch <span id="freq"></span>
+		</div>
+		<div id="pitch_slider">
+			<input id="pitch_val" type="range" min="1" max="1000" value="50" class="slider" style="width:1000px">
+		</div>
+	</div>
+	<script src="js/audio.js"></script>
+	<script src="js/oscillator.js"></script>
+	<script>
+master_out.set_volume(1);
+var osc = new oscillator(master_out.amp);
+
+var freq_display = document.getElementById("freq");
+freq_display.innerHTML = freq;
+
+var freq_slider = document.getElementById("pitch_val");
+freq_slider.oninput = function() {
+	var freq = Math.pow(this.value / 10, 2) + 20;
+	osc.set_frequency(freq);
+	freq_display.innerHTML = freq;
+}
+	</script>
+</body>
+</html>
