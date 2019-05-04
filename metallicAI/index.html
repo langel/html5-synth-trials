@@ -1,0 +1,162 @@
+<html>
+<head>
+	<title>Metallica AI?</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+	<style>
+		:root{
+			--black:#111;
+			--blue:#001484;
+			--red:#d00;
+			--yellow:#ffd800;
+			--white:#eee;
+		}
+		body{
+			font-family: 'Roboto Slab', serif;
+			background:var(--blue);
+			color:var(--white);
+			font-size:18px;
+		}
+		.console{
+			display:flex;
+			flex-direction:row;
+			flex-wrap:wrap;
+			justify-content:space-evenly;
+			align-content:stretch;
+		}
+		.module{
+			margin:20px;	
+		}
+		p{margin:0;padding:10px}
+		input,select,fieldset span{
+			background:var(--black);
+			font-weight:bold;
+			padding:5px;
+			font-size:1em;
+			font-family: 'Ubuntu Mono', monospace;
+			text-align:right;
+			border:none;
+		}
+		input,select{
+			color:var(--yellow);
+			width:6em;
+		}
+		input[type='file']{width:100%}
+		button{
+			border-radius:3px;
+			color:var(--yellow);
+			background:var(--black);
+			font-size:1em;
+			font-weight:bold;
+			font-variant:small-caps;
+		}
+		fieldset{
+			border:2px var(--white) solid;
+			border-radius:10px;
+			position:relative;
+		}
+		legend,label{
+			background:var(--white);
+			color:var(--blue);
+			font-variant:small-caps;
+			font-size:1.5em;
+			border-radius:5px;
+			padding:0 10px;
+		}
+		fieldset span{
+			display:inline-block;
+			color:var(--red);
+			width:4.5em;
+			position:absolute;
+			right:10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="console">
+		<div class="module">
+			<fieldset>
+				<legend>Importer / Loader</legend>
+				<p>
+					8bit Unsigned Raw DPCM only
+				</p><p>
+				imported sample rate
+				<select id="samplerate_import">
+					<option value="8000">8kHz</option>
+					<option value="11025">11025Hz</option>
+					<option value="16000">16kHz</option>
+					<option value="22050" selected>22050Hz</option>
+					<option value="32000">32kHz</option>
+					<option value="44100">44.1kHz</option>
+					<option value="48000">48kHz</option>
+				</select>
+				</p><p>
+					<input type="file" id="audio-input">
+				</p>
+			</fieldset>
+		</div>
+		<div class="module">
+			<fieldset>
+				<legend>Grains & Slices</legend>
+				<button id="grain_update" style="float:right">Center Offset</button>
+				<p>
+					Grain Size
+					<input id="grain_size" type="number" step="1" maxlength="6" min="0">
+					<button id="grain_halve">/2</button>
+					<button id="grain_double">*2</button>
+				</p><p>
+					Location Agitator
+					<input id="grain_agrandom" type="number" step="1" maxlength="6" min="0">
+					*rand() - 
+					<input id="grain_agoffset" type="number" step="1" maxlength="6" min="0">
+				</p>
+			</fieldset>
+		</div>
+		<div class="module">
+			<fieldset>
+				<legend>Rhythm Calc</legend>
+			</fieldset>
+		</div>
+
+		<div class="module">
+			<fieldset>
+				<legend>Status</legend>
+				<p>
+					Duration
+					<span id="song_dur">NaN</span>
+				</p>
+				<p style="width:10em">
+					Position
+					<span id="song_loc">NaN</span>
+				</p>
+				<p>
+					Length
+					<span id="song_length">NaN</span>
+				</p>
+				<p>
+					Grain Start
+					<span id="grain_start_pos">wtf</span>
+				</p>
+			</fieldset>
+		</div>
+		<div class="module">
+<pre>
+	possible controls:
+		play/pause button
+		autoplay on load checkbox
+		rhythm calculator
+			bpm integer
+			subdivision dropdown
+			output/move to grain size button
+		grain size modulation lfo?
+
+	possible displays:
+		grain counter
+		current playback duration
+		waveform canvas
+
+</pre>
+		</div>
+	<script src="metallica-ai.js"></script>
+</body>
+</html>

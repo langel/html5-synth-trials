@@ -14,11 +14,20 @@
 		<div id="pitch_slider">
 			<input id="pitch_val" type="range" min="1" max="1000" value="50" class="slider" style="width:1000px">
 		</div>
+		<div id="waveform_controller" class="wrapper">
+			<div id="wave_template" class="vranger">
+				<div class="wave_name"></div>
+				<input type="range" min="0" max="100" value="25">
+				<div class="min"></div>
+				<div class="max"></div>
+			</div>
+		</div>
 	</div>
+	
 	<script src="js/audio.js"></script>
 	<script src="js/oscillator.js"></script>
 	<script>
-master_out.set_volume(1);
+master_out.set_volume(0.5);
 var osc = new oscillator(master_out.amp);
 
 var freq_display = document.getElementById("freq");
@@ -30,6 +39,28 @@ freq_slider.oninput = function() {
 	osc.set_frequency(freq);
 	freq_display.innerHTML = freq;
 }
+
+var waveform_controller = document.getElementById('waveform_controller');
+var wave_template = document.getElementById('wave_template');
+osc.waveforms.forEach((waveform, i) => {
+	console.log('init waveform controller :: ' + waveform.shape);
+	var wave_panel = wave_template.cloneNode(true);
+	wave_panel.id = 'vol_'+waveform.shape;
+	wave_panel.getElementsByClassName('wave_name')[0].innerHTML = waveform.shape;
+	waveform_controller.appendChild(wave_panel);
+	wave_panel.getElementsByTagName('input')[0].oninput = function() {
+		osc.set_waveform_volume(i, this.value/100);
+	}
+});
+wave_template.remove();
+
+setInterval(function() {
+	osc.waveforms.forEach(function(waveform) {
+		document.querySelector('#vol_'+waveform.shape+' .min').innerHTML = waveform.min;
+		document.querySelector('#vol_'+waveform.shape+' .max').innerHTML = waveform.max;
+	})
+}, 250);
+
 	</script>
 </body>
 </html>
