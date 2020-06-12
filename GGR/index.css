@@ -1,0 +1,37 @@
+html, body {
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	background:#6e3b3b;
+	color:#f3cf7a;
+}
+
+#attract_mode {}
+#gg_space {
+	height: 100%;
+	width: 100%;
+	z-index: 25;
+}
+#title {
+	position: absolute;
+	top: 50px;
+	width: 100%;
+	font-size: 150px;
+	font-variant: small-caps;
+	text-align: center;
+	text-shadow: #5d5d5a 0px 5px 5px;
+	z-index: 250;
+}
+#game {}
+
+/*
+#6e3b3b
+#ac3f21
+#be6a15
+#f3cf7a
+
+#5d5d5a
+#ffa45c
+#ffcdab
+#fff4e3
+*/

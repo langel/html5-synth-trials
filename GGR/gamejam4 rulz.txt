@@ -1,0 +1,5 @@
+only graphics from the spritesheet are allowed
+entry must use at least part of the spritesheet
+the only spritesheet editing allowed is cropping, resizing, and rotating
+single color or two color gradient is allowed for background
+text is allowed
