@@ -1,4 +1,4 @@
-.botb-icon{display:inline-block;vertical-align:text-bottom;image-rendering: -webkit-crisp-edges;image-rendering: -moz-crisp-edges;image-rendering: pixelated;background-image:url("botb-spritesheet.png");position:absolute;}.botb-icon.icons-BotB{width:16px;height:16px;background-position:-0px -0px;}
+.botb-icon{display:inline-block;vertical-align:text-bottom;image-rendering: -webkit-crisp-edges;image-rendering: -moz-crisp-edges;image-rendering: pixelated;background-image:url("botb-spritesheet.png");}.botb-icon.icons-BotB{width:16px;height:16px;background-position:-0px -0px;}
 .botb-icon.icons-admins{width:16px;height:16px;background-position:-16px -0px;}
 .botb-icon.icons-ascended{width:16px;height:16px;background-position:-32px -0px;}
 .botb-icon.icons-battles{width:16px;height:16px;background-position:-48px -0px;}

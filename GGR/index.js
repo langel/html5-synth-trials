@@ -1,29 +1,3 @@
-
-let rnd_bool = () => {return Math.random() < 0.5};
-let rnd_dec = (max) => {return Math.random() * max};
-let rnd_int = (max) => {return Math.round(Math.random() * max)};
-let quad_in_out = (t) => {return t<.5 ? 2*t*t : -1+(4-2*t)*t};
-
-let icon_create = (icon_type, target) => {
-	let temp = document.createElement('template');
-	temp.innerHTML = '<div class="botb-icon icons-' + icon_type + '"></div>';
-	let el = temp.content.firstChild;
-	target.appendChild(el);
-	return el;
-}
-
-
-let screen = {
-	update: () => {
-		screen.x = document.body.scrollWidth;
-		screen.y = document.body.scrollHeight;
-	},
-	x: 0,
-	y: 0
-};
-screen.update();
-window.addEventListener('resize', screen.update);
-
 let gg_space = document.getElementById('gg_space');
 
 let golden_gloves = [];
@@ -43,8 +17,23 @@ for (let i = 0; i < golden_glove_count; i++) {
 	});
 }
 
+let attract = document.getElementById('attract_mode');
+attract.style.display = 'none';
+let gameboard = document.getElementById('game');
+let flags = [];
+icon_group.flags.forEach((flag) => {
+	flags.push(icon_create(flag, gameboard));
+});
+
+
+//mode_game.before();
 
 setInterval(() => {
+
+
+
+//	mode_game.frame();
+/*
 	golden_gloves.forEach(gg => {
 		// scale
 		gg.pulse_pos += gg.pulse_pace;
@@ -63,7 +52,10 @@ setInterval(() => {
 		gg.y += (gg.lineal) ? gg.speed : -gg.speed;
 		gg.el.style.top = gg.y + "px";
 	});
+*/
 }, 30);
 
 
+
+// start the game
 

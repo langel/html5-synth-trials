@@ -22,8 +22,12 @@ html, body {
 	text-shadow: #5d5d5a 0px 5px 5px;
 	z-index: 250;
 }
-#game {}
 
+#game {
+}
+
+#options {
+}
 /*
 #6e3b3b
 #ac3f21
